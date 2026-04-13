@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UFO캐처 피규어 캘린더
 
-## Getting Started
+일본 프라이즈 피규어(UFO캐처/크레인게임 경품) 발매 일정을 한눈에 확인할 수 있는 캘린더 웹앱입니다.
 
-First, run the development server:
+## 주요 기능
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 월별 캘린더 뷰로 피규어 발매 일정 확인
+- 모바일 리스트 뷰 지원
+- 카테고리별 필터링 (피규어 / 인형 / 기타)
+- 피규어 상세 모달 (이미지, 일본어/한국어/영어 이름)
+- DMM 온라인 크레인 게임 데이터 동기화
+
+## 기술 스택
+
+- **프론트엔드**: Next.js 16, React 19, TypeScript
+- **스타일링**: Tailwind CSS
+- **데이터베이스**: Firebase Firestore
+- **이미지**: Next.js Image 최적화
+
+## 시작하기
+
+### 환경 변수 설정
+
+`.env.local` 파일을 생성하고 Firebase 설정을 추가합니다:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 개발 서버 실행
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[http://localhost:3000](http://localhost:3000)에서 확인할 수 있습니다.
 
-## Learn More
+## 스크립트
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| 스크립트 | 설명 |
+|---------|------|
+| `scripts/sync-figures.ts` | JSON 파일에서 Firestore로 피규어 데이터 동기화 |
+| `scripts/convert-dmm.ts` | DMM 온라인 크레인 게임 데이터 변환 |
+| `scripts/add-figure.ts` | 개별 피규어 추가 |
+| `scripts/delete-figure.ts` | 피규어 삭제 |
+| `scripts/list-figures.ts` | 등록된 피규어 목록 조회 |
