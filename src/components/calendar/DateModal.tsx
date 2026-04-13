@@ -36,7 +36,17 @@ export default function DateModal({
 
   if (!date) return null;
 
-  const sorted = [...figures].sort((a, b) => a.time.localeCompare(b.time));
+  const categoryOrder: Record<CategoryFilter, number> = {
+    "전체": 0,
+    "피규어": 1,
+    "인형": 2,
+    "기타": 3,
+  };
+  const sorted = [...figures].sort((a, b) => {
+    const catDiff = categoryOrder[getCategoryFromName(a.nameKo)] - categoryOrder[getCategoryFromName(b.nameKo)];
+    if (catDiff !== 0) return catDiff;
+    return a.time.localeCompare(b.time);
+  });
   const filtered = filter === "전체"
     ? sorted
     : sorted.filter((f) => getCategoryFromName(f.nameKo) === filter);
