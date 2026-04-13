@@ -40,6 +40,11 @@ ufocalender-*.json
 # OMC state
 .omc/
 
+# Firebase
+.firebase/
+.firebaserc
+firebase.json
+
 # vercel
 .vercel
 
